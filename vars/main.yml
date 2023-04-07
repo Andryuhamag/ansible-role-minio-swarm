@@ -1,0 +1,4 @@
+---
+# vars file for ansible-role-minio-swarm
+minio_service_count: 4
+minio_service_volume_count: 2
