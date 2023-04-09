@@ -1,6 +1,11 @@
 ---
 # tasks file for ansible-role-minio-swarm
 
+- name: "Copy minio-pass file to swarm manager"
+  ansible.builtin.copy:
+    src: {{ playbook_dir }}/minio_root_pass.txt
+    dest: /opt/minio_root_pass.txt
+
 - name: "Generate minio-cluster.yml file"
   ansible.builtin.template:
     src: minio-cluster.yml.j2
