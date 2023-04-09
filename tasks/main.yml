@@ -5,6 +5,7 @@
   ansible.builtin.copy:
     src: ./minio_root_pass.txt
     dest: /opt/minio_root_pass.txt
+  when: inventory_hostname in groups['swarm_manager'][0]
 
 - name: "Generate minio-cluster.yml file"
   ansible.builtin.template:
