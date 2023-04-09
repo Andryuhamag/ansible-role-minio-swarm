@@ -3,7 +3,7 @@
 
 - name: "Copy minio-pass file to swarm manager"
   ansible.builtin.copy:
-    src: {{ playbook_dir }}/minio_root_pass.txt
+    src: ./minio_root_pass.txt
     dest: /opt/minio_root_pass.txt
 
 - name: "Generate minio-cluster.yml file"
