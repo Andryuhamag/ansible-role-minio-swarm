@@ -1,20 +1,6 @@
 ---
 # tasks file for ansible-role-minio-swarm
 
-- name: "Generate visualizer.yml file"
-  ansible.builtin.template:
-    src: visualizer.yml.j2
-    dest: /opt/visualizer.yml
-  when: inventory_hostname in groups['swarm_manager'][0]
-
-- name: "Init visualizer"
-  community.docker.docker_stack:
-    state: present
-    name: visualizer
-    compose:
-      - /opt/visualizer.yml
-  when: inventory_hostname in groups['swarm_manager'][0]
-
 - name: "Generate minio-cluster.yml file"
   ansible.builtin.template:
     src: minio-cluster.yml.j2

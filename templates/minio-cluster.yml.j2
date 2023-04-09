@@ -9,7 +9,9 @@ x-minio-common: &minio-common
     - "9001"
   environment:
     MINIO_ROOT_USER: minioadmin
-    MINIO_ROOT_PASSWORD: minioadmin
+    MINIO_ROOT_PASSWORD_FILE: /run/secrets/minio_root_pass
+  secrets:
+    - minio_root_pass
   healthcheck:
     test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
     interval: 30s
@@ -42,6 +44,10 @@ services:
 {% for i in range(1,minio_service_count+1) %}
       - minio{{ i }}
 {% endfor %}
+
+secrets:
+  minio_root_pass:
+    file: {{ playbook_dir }}/minio_root_pass.txt
 
 ## By default this config uses default local driver,
 ## For custom volumes replace with volume driver configuration.
